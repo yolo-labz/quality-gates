@@ -1,0 +1,16 @@
+{
+  "name": "code-slop-gate",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Prototype code-slop gate — aislop + jscpd orchestrator (Claude Code hook + PR CI)",
+  "scripts": {
+    "gate": "./code-slop-gate.sh"
+  },
+  "devDependencies": {
+    "aislop": "0.12.0",
+    "jscpd": "^5.0.10"
+  },
+  "overrides": {
+    "react": "19.2.6"
+  }
+}

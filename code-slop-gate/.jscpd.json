@@ -1,0 +1,13 @@
+{
+  "minTokens": 50,
+  "threshold": 0,
+  "reporters": ["json"],
+  "absolute": true,
+  "gitignore": true,
+  "ignore": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/.git/**"
+  ]
+}

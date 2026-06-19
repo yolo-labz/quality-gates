@@ -1,0 +1,64 @@
+name: 'Quality Gates'
+description: 'Deterministic code-slop (aislop + jscpd) + alignment gates on a PR diff. Runtime-LLM-free; the only network is npm ci for the code-slop engines.'
+branding:
+  icon: 'shield'
+  color: 'purple'
+
+inputs:
+  base-ref:
+    description: 'Git ref to diff the PR against. Caller must checkout with fetch-depth: 0.'
+    required: false
+    default: 'origin/main'
+  aislop-max-errors:
+    description: 'Fail when aislop error count exceeds this.'
+    required: false
+    default: '0'
+  jscpd-max-pct:
+    description: 'Fail when copy-paste duplication percentage exceeds this.'
+    required: false
+    default: '0'
+  align-fail-on-todo:
+    description: 'Fail on TODO/FIXME/stub/NotImplemented in changed code (1=block, 0=report).'
+    required: false
+    default: '1'
+  align-fail-on-skip:
+    description: 'Fail on skipped/.only/disabled tests added (1=block, 0=report).'
+    required: false
+    default: '1'
+  align-fail-on-lint-disable:
+    description: 'Fail on added lint-suppressions (eslint-disable/@ts-ignore/noqa/…).'
+    required: false
+    default: '1'
+  align-max-files:
+    description: 'Fail if changed code files exceed N (0 = off).'
+    required: false
+    default: '0'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Node (code-slop engines)
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+
+    - name: Install code-slop engines (aislop + jscpd)
+      shell: bash
+      working-directory: ${{ github.action_path }}/code-slop-gate
+      run: npm ci
+
+    - name: code-slop gate (anti-slop, on the PR diff)
+      shell: bash
+      env:
+        AISLOP_MAX_ERRORS: ${{ inputs.aislop-max-errors }}
+        JSCPD_MAX_PCT: ${{ inputs.jscpd-max-pct }}
+      run: '"${{ github.action_path }}/code-slop-gate/code-slop-gate.sh" --base "${{ inputs.base-ref }}"'
+
+    - name: alignment gate (scope + completion, on the PR diff)
+      shell: bash
+      env:
+        ALIGN_FAIL_ON_TODO: ${{ inputs.align-fail-on-todo }}
+        ALIGN_FAIL_ON_SKIP: ${{ inputs.align-fail-on-skip }}
+        ALIGN_FAIL_ON_LINT_DISABLE: ${{ inputs.align-fail-on-lint-disable }}
+        ALIGN_MAX_FILES: ${{ inputs.align-max-files }}
+      run: '"${{ github.action_path }}/alignment-gate/alignment-gate.sh" --base "${{ inputs.base-ref }}"'
