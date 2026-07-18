@@ -26,6 +26,7 @@ set -uo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 AISLOP="$SCRIPT_DIR/node_modules/.bin/aislop"
 JSCPD="$SCRIPT_DIR/node_modules/.bin/jscpd"
+BASELINE_FILTER="$SCRIPT_DIR/dependency-baseline.jq"
 
 AISLOP_MAX_ERRORS="${AISLOP_MAX_ERRORS:-0}"
 AISLOP_MIN_SCORE="${AISLOP_MIN_SCORE:-0}"
@@ -36,6 +37,7 @@ CODE_RE='\.(ts|tsx|js|jsx|py|go|rs|rb|php)$'
 die() { echo "code-slop-gate: $*" >&2; exit 2; }
 [ -x "$AISLOP" ] || die "aislop missing — run 'npm install' in $SCRIPT_DIR"
 [ -x "$JSCPD" ]  || die "jscpd missing — run 'npm install' in $SCRIPT_DIR"
+[ -f "$BASELINE_FILTER" ] || die "dependency baseline filter missing: $BASELINE_FILTER"
 command -v jq >/dev/null 2>&1 || die "jq is required"
 
 WORK="$(mktemp -d)"
@@ -85,6 +87,54 @@ else
   aislop_json="$("$AISLOP" "${aislop_args[@]}" 2>/dev/null || true)"
 fi
 jq -e . >/dev/null 2>&1 <<<"$aislop_json" || die "aislop emitted no parseable JSON (args: ${aislop_args[*]})"
+
+# `aislop --changes` runs a repository-wide dependency audit when a manifest
+# or lockfile changes. Ratchet those findings against the merge base: exact
+# pre-existing vulnerabilities remain visible as warnings, while new or
+# worsened high-severity findings stay errors. A failed base scan fails closed.
+baseline_dependency_errors=0
+if [ "$mode" = "changes" ] &&
+   jq -e '.diagnostics[]? | select(.engine == "security" and .rule == "security/vulnerable-dependency" and .severity == "error")' \
+     >/dev/null 2>&1 <<<"$aislop_json"; then
+  merge_base="$(git merge-base "$base" HEAD 2>/dev/null || true)"
+  baseline_tree="$WORK/baseline"
+  baseline_json_file="$WORK/baseline.json"
+  if [ -n "$merge_base" ] && mkdir -p "$baseline_tree" &&
+     git archive "$merge_base" | tar -x -C "$baseline_tree"; then
+    # Only the security engine is needed for the comparison scan. Telemetry is
+    # explicitly disabled because this path runs inside CI.
+    mkdir -p "$baseline_tree/.aislop"
+    cat >"$baseline_tree/.aislop/config.yml" <<'YAML'
+version: 1
+engines:
+  format: false
+  lint: false
+  code-quality: false
+  ai-slop: false
+  architecture: false
+  security: true
+security:
+  audit: true
+  auditTimeout: 25000
+telemetry:
+  enabled: false
+YAML
+    "$AISLOP" scan --json "$baseline_tree" >"$baseline_json_file" 2>/dev/null || true
+    if jq -e . "$baseline_json_file" >/dev/null 2>&1; then
+      head_dependency_errors="$(jq '[.diagnostics[]? | select(.engine == "security" and .rule == "security/vulnerable-dependency" and .severity == "error")] | length' <<<"$aislop_json")"
+      aislop_json="$(jq --slurpfile baseline "$baseline_json_file" --arg base "$base" -f "$BASELINE_FILTER" <<<"$aislop_json")"
+      remaining_dependency_errors="$(jq '[.diagnostics[]? | select(.engine == "security" and .rule == "security/vulnerable-dependency" and .severity == "error")] | length' <<<"$aislop_json")"
+      if [ "$remaining_dependency_errors" -lt "$head_dependency_errors" ]; then
+        baseline_dependency_errors=$((head_dependency_errors - remaining_dependency_errors))
+      fi
+    else
+      echo "code-slop-gate: dependency baseline scan unavailable; preserving head errors" >&2
+    fi
+  else
+    echo "code-slop-gate: dependency base ref unavailable; preserving head errors" >&2
+  fi
+fi
+
 a_errors="$(jq -r '.summary.errors   // 0' <<<"$aislop_json")"
 a_warns="$( jq -r '.summary.warnings // 0' <<<"$aislop_json")"
 a_score="$( jq -r '.score            // empty' <<<"$aislop_json")"
@@ -116,6 +166,7 @@ fi
 # --- report ---
 echo "── code-slop gate ─────────────────────────────"
 printf 'aislop : score %s · %s error(s) · %s warning(s)\n' "${a_score:-n/a}" "$a_errors" "$a_warns"
+[ "$baseline_dependency_errors" -gt 0 ] && printf 'baseline: %s unchanged dependency error(s) reported as warning(s)\n' "$baseline_dependency_errors"
 printf 'jscpd  : %s%% duplication · %s clone(s) · %s line(s)\n' "$j_pct" "$j_clones" "$j_dup"
 if [ "$a_errors" -gt 0 ] || [ "$a_warns" -gt 0 ]; then
   echo "findings:"

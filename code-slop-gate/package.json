@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "description": "Prototype code-slop gate — aislop + jscpd orchestrator (Claude Code hook + PR CI)",
   "scripts": {
-    "gate": "./code-slop-gate.sh"
+    "gate": "./code-slop-gate.sh",
+    "test": "./test-dependency-baseline.sh"
   },
   "devDependencies": {
     "aislop": "0.12.0",

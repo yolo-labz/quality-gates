@@ -14,6 +14,11 @@ The same two gates also run as Claude Code / opencode / Codex hooks + git pre-co
 
 Both are deterministic (no runtime LLM). Exit 0 = clean, 1 = over threshold, 2 = tooling error.
 
+Dependency audits are ratcheted against the PR merge base. An exact high/critical
+finding already present on the base branch remains visible as a baseline warning;
+a new or worsened finding remains a blocking error. If the base scan cannot run,
+the gate fails closed and preserves the head findings unchanged.
+
 ## Use it
 
 ```yaml
