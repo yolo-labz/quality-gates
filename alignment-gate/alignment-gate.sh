@@ -24,7 +24,8 @@
 
 set -uo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# No SCRIPT_DIR: this gate is zero-dependency by design and resolves no sibling
+# files, unlike code-slop-gate which locates its engines relative to itself.
 ALIGN_FAIL_ON_TODO="${ALIGN_FAIL_ON_TODO:-1}"
 ALIGN_FAIL_ON_SKIP="${ALIGN_FAIL_ON_SKIP:-1}"
 ALIGN_FAIL_ON_LINT_DISABLE="${ALIGN_FAIL_ON_LINT_DISABLE:-1}"
@@ -78,7 +79,17 @@ emit_path() {
 }
 
 # build the filtered line stream
-{ [ "$mode" = "path" ] && emit_path || emit_diff; } | \
+#
+# if/then/else, not `A && B || C`: the latter runs C whenever A OR B is false,
+# so a failing emit_path (its status is the last awk's) would ALSO run
+# emit_diff and append git-diff output to a path scan — in path mode there may
+# be no git repo at all. Two different sources silently concatenated into one
+# stream is precisely the quiet wrongness this gate exists to catch.
+if [ "$mode" = "path" ]; then
+  emit_path
+else
+  emit_diff
+fi | \
   awk -F'\t' -v code="$CODE_RE" -v self="$SELF_RE" -v meta="$META_RE" \
     '$1 ~ code && $1 !~ self && $1 !~ meta' >"$stream"
 
