@@ -1,5 +1,5 @@
 name: 'Quality Gates'
-description: 'Deterministic code-slop (aislop + jscpd) + alignment gates on a PR diff. Runtime-LLM-free; the only network is npm ci for the code-slop engines.'
+description: 'Deterministic code-slop (aislop + jscpd), alignment, and Gherkin MUST-rule gates on a PR diff. Runtime-LLM-free; the only network is npm ci for the engines.'
 branding:
   icon: 'shield'
   color: 'purple'
@@ -33,6 +33,14 @@ inputs:
     description: 'Fail if changed code files exceed N (0 = off).'
     required: false
     default: '0'
+  gherkin-paths:
+    description: 'Space-separated files/dirs to lint for .feature MUST rules. A path that does not exist, or holds no .feature files, is a silent pass — most repos have none by design.'
+    required: false
+    default: 'features'
+  gherkin-fail-on:
+    description: 'Lowest severity that fails the build: error (default) or warning. placeholder-data is warning-tier because it is a SHOULD in the contract.'
+    required: false
+    default: 'error'
 
 runs:
   using: 'composite'
@@ -62,3 +70,19 @@ runs:
         ALIGN_FAIL_ON_LINT_DISABLE: ${{ inputs.align-fail-on-lint-disable }}
         ALIGN_MAX_FILES: ${{ inputs.align-max-files }}
       run: '"${{ github.action_path }}/alignment-gate/alignment-gate.sh" --base "${{ inputs.base-ref }}"'
+
+    # Installed unconditionally rather than behind a "does this repo have
+    # scenarios" probe: two packages is cheap, and a detection bug here would
+    # surface as a hard tooling error (exit 2) in repos that DO have scenarios.
+    # The gate's own deps check stays as the safety net, not as the common path.
+    - name: Install Gherkin parser
+      shell: bash
+      working-directory: ${{ github.action_path }}/gherkin-lint
+      run: npm ci
+
+    - name: gherkin gate (MUST rules on .feature files)
+      shell: bash
+      env:
+        GHERKIN_PATHS: ${{ inputs.gherkin-paths }}
+        GHERKIN_FAIL_ON: ${{ inputs.gherkin-fail-on }}
+      run: '"${{ github.action_path }}/gherkin-lint/gherkin-lint-gate.sh"'
