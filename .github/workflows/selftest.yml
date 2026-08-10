@@ -1,0 +1,126 @@
+# selftest — the gate factory gates itself.
+#
+# This repo ships three gates that the fleet SHA-pins and (on wa) runs as a
+# required check. Until now it had no CI at all: zero workflows, zero runs. So
+# every gate's own test suite — including the one that catches a linter
+# certifying a crashed process as clean — executed on no pull request, and a
+# bug here would reach every consumer on their next pin bump with nothing in
+# between.
+#
+# That is the same failure this repo exists to prevent, one level up: a green
+# merge read as evidence of an effect it did not have.
+#
+# GitHub-hosted is deliberate. The fleet's other CI is self-hosted because the
+# personal account's GitHub-hosted runners are billing-locked; this org's are
+# not (wa's `code-slop + alignment` job runs here and is a required check), and
+# a gate repo should not depend on one machine being up.
+
+name: selftest
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gates:
+    name: gate suites
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@f808768d1510423e83855289c910610ca9b43176 # v2.17.0
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+
+      # Every shipped script parses and passes shellcheck before any of it is
+      # trusted to gate a consumer's PR.
+      - name: Static checks
+        run: |
+          set -euo pipefail
+          shellcheck --version >/dev/null
+          while IFS= read -r -d '' f; do
+            bash -n "$f"
+            shellcheck "$f"
+          done < <(find . -name '*.sh' -not -path './**/node_modules/*' -print0)
+          node --check gherkin-lint/gherkin-lint.mjs
+
+      - name: code-slop — dependency baseline ratchet
+        run: code-slop-gate/test-dependency-baseline.sh
+
+      - name: gherkin — install engines
+        working-directory: gherkin-lint
+        run: npm ci
+
+      # Rule discrimination: good input must stay silent, broken input must trip
+      # the exact rule set by name, and a crashed engine must not read as clean.
+      - name: gherkin — linter suite
+        working-directory: gherkin-lint
+        run: node gherkin-lint.test.mjs
+
+      # Wrapper behaviour: silent on repos with no .feature files, fail-closed
+      # when the engine is missing but there is something to lint.
+      - name: gherkin — gate wrapper suite
+        working-directory: gherkin-lint
+        run: ./test-gherkin-lint-gate.sh
+
+  workflows:
+    name: workflow lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@f808768d1510423e83855289c910610ca9b43176 # v2.17.0
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      # Pinned tarball + sha256 verify — the same install shape wa uses, and the
+      # only one acceptable here: a repo whose product is supply-chain hardening
+      # must not fetch its own linter through a curl-pipe-bash. Bump version and
+      # sha in lockstep.
+      - name: Install actionlint
+        run: |
+          set -eu
+          ACTIONLINT_VERSION="1.7.12"
+          ACTIONLINT_AMD64_SHA256="8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8"
+          mkdir -p "$HOME/.local/bin"
+          tarball="actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz"
+          curl -sSfL -o "/tmp/${tarball}" \
+            "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/${tarball}"
+          actual_sha="$(sha256sum "/tmp/${tarball}" | awk '{print $1}')"
+          if [ "$actual_sha" != "$ACTIONLINT_AMD64_SHA256" ]; then
+            echo "::error::actionlint tarball sha256 mismatch — expected $ACTIONLINT_AMD64_SHA256 got $actual_sha"
+            exit 1
+          fi
+          tar xzf "/tmp/${tarball}" -C "$HOME/.local/bin" actionlint
+          rm "/tmp/${tarball}"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      # action.yml is this repo's product — a consumer inherits whatever it
+      # does, so its pins and expressions are checked like any other workflow.
+      - name: actionlint
+        run: actionlint -color
