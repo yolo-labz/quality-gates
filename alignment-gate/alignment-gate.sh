@@ -104,7 +104,7 @@ checks=(
   "incomplete/ellipsis-body|error|0|$ALIGN_FAIL_ON_TODO|^[[:space:]]*\.\.\.[[:space:]]*$|ellipsis placeholder body"
   "test/skip|error|1|$ALIGN_FAIL_ON_SKIP|\b(it|test|describe)\.(skip|todo|failing|only)\b|\bx(it|describe|test)[[:space:]]*\(|@pytest\.mark\.(skip|skipif|xfail)\b|pytest\.skip\(|unittest\.skip|\bt\.Skip(f|Now)?\(|#\[ignore\b|@(Disabled|Ignore)\b|markTestSkipped|markTestIncomplete|skipped / .only / disabled test added"
   "align/lint-suppressed|error|0|$ALIGN_FAIL_ON_LINT_DISABLE|eslint-disable|biome-ignore|@ts-(ignore|nocheck|expect-error)|#[[:space:]]*noqa|#[[:space:]]*type:[[:space:]]*ignore|#[[:space:]]*pylint:[[:space:]]*disable|//[[:space:]]*nolint|#\[allow\(|@SuppressWarnings|rubocop:disable|swiftlint:disable|lint suppression added (goal-hacking)"
-  "align/debug-artifact|warn|0|$ALIGN_FAIL_ON_DEBUG|console\.(log|debug)\(|^[[:space:]]*debugger;|pdb\.set_trace\(|binding\.pry|[[:space:]]dbg!\(|debug artifact left in code"
+  "align/debug-artifact|error|0|$ALIGN_FAIL_ON_DEBUG|console\.(log|debug)\(|^[[:space:]]*debugger;|pdb\.set_trace\(|binding\.pry|[[:space:]]dbg!\(|debug artifact left in code"
 )
 
 findings="$WORK/findings"; : >"$findings"   # sev \t rule \t path:lineno \t message
@@ -116,6 +116,11 @@ for spec in "${checks[@]}"; do
   test_only="${rest%%|*}"; rest="${rest#*|}"
   toggle="${rest%%|*}"; rest="${rest#*|}"
   msg="${rest##*|}"; re="${rest%|*}"
+  # The declared severity is the rule's tier WHEN ENABLED; the toggle decides
+  # whether it is enabled. Downgrade only — a rule cannot be promoted above the
+  # tier it declares. debug-artifact therefore declares `error` and reaches it
+  # only via ALIGN_FAIL_ON_DEBUG=1; declaring it `warn` made that toggle a
+  # no-op, i.e. a variable named FAIL_ON_* that could not cause a failure.
   [ "$toggle" = "0" ] && [ "$sev" = "error" ] && sev="warn"   # strictness downgrade
   while IFS=$'\t' read -r path lineno content; do
     [ "$test_only" = "1" ] && { echo "$path" | grep -qE "$TEST_RE" || continue; }
