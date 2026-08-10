@@ -29,6 +29,10 @@ inputs:
     description: 'Fail on added lint-suppressions (eslint-disable/@ts-ignore/noqa/…).'
     required: false
     default: '1'
+  align-fail-on-debug:
+    description: 'Fail on debug artifacts left in changed code (console.log/debugger/set_trace). Warning-tier by default.'
+    required: false
+    default: '0'
   align-max-files:
     description: 'Fail if changed code files exceed N (0 = off).'
     required: false
@@ -68,6 +72,7 @@ runs:
         ALIGN_FAIL_ON_TODO: ${{ inputs.align-fail-on-todo }}
         ALIGN_FAIL_ON_SKIP: ${{ inputs.align-fail-on-skip }}
         ALIGN_FAIL_ON_LINT_DISABLE: ${{ inputs.align-fail-on-lint-disable }}
+        ALIGN_FAIL_ON_DEBUG: ${{ inputs.align-fail-on-debug }}
         ALIGN_MAX_FILES: ${{ inputs.align-max-files }}
       run: '"${{ github.action_path }}/alignment-gate/alignment-gate.sh" --base "${{ inputs.base-ref }}"'
 

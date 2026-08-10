@@ -66,6 +66,11 @@ jobs:
       - name: code-slop — dependency baseline ratchet
         run: code-slop-gate/test-dependency-baseline.sh
 
+      # Every rule paired with the near-miss that must not fire, plus the
+      # path-vs-diff separation whose absence hid a real bug until #5.
+      - name: alignment — rule discrimination suite
+        run: alignment-gate/test-alignment-gate.sh
+
       - name: gherkin — install engines
         working-directory: gherkin-lint
         run: npm ci

@@ -112,6 +112,7 @@ ratchet down. Never loosen a passing threshold without an inline justification.
 | `align-fail-on-todo` | `1` | TODO/stub in changed code (0 = report-only) |
 | `align-fail-on-skip` | `1` | skipped/`.only` tests |
 | `align-fail-on-lint-disable` | `1` | added lint-suppressions |
+| `align-fail-on-debug` | `0` | `console.log` / `debugger` / `pdb.set_trace` left in changed code; warning-tier until opted in |
 | `align-max-files` | `0` | fail if changed code files > N (0 = off) |
 | `gherkin-paths` | `features` | space-separated files/dirs to lint; a missing path or one with no `.feature` files is a silent pass |
 | `gherkin-fail-on` | `error` | lowest severity that fails; `warning` also fails on `placeholder-data` (a SHOULD in the contract, so warning-tier by default) |
