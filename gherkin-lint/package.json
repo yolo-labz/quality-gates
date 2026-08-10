@@ -1,0 +1,13 @@
+{
+  "name": "@yolo-labz/gherkin-lint",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Fleet AST linter for .feature files, over the official Gherkin parser. Replaces the dead upstream gherkin-lint.",
+  "bin": { "gherkin-lint": "./gherkin-lint.mjs" },
+  "scripts": { "test": "node gherkin-lint.test.mjs" },
+  "dependencies": {
+    "@cucumber/gherkin": "^32.1.0",
+    "@cucumber/messages": "^28.1.0"
+  }
+}
