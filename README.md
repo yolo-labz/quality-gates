@@ -56,6 +56,37 @@ jobs:
           base-ref: origin/${{ github.base_ref }}
 ```
 
+## What a green tick here does and does not mean
+
+This action **runs** on every consumer. Whether it **gates** depends on the
+consumer repo, and the difference is not a setting anyone forgot to flip.
+
+Rulesets and branch protection are paid features for **private** repositories.
+Measured across the fleet on 10/08/2026:
+
+| Repo | Visibility | Required checks | This action is… |
+|---|---|---|---|
+| `yolo-labz/wa` | public | 11 | a **gate** — red blocks the merge |
+| every private repo (`Notes`, `NixOS`, `Proso`, `COC_BOT`, `bilu-bridge`, `claude-skills`) | private | 0 (API returns 403 `Upgrade to GitHub Pro…`) | a **signal** — red is visible and merge still succeeds |
+
+So on a private free-tier repo this action is a report, not a floor: a red run
+can be merged over, and the local hook layer it pairs with is
+`--no-verify`-bypassable by construction. That is worth stating plainly, because
+the failure mode this whole gate suite exists to prevent is a green tick being
+read as evidence it is not.
+
+Nothing about the action changes between the two cases — only the claim you are
+entitled to make about it. The two ways to get a real floor on a private repo
+are to make it public or to upgrade the plan; both are owner decisions, neither
+is a repo-level fix.
+
+**This repo is itself in the gap it documents.** `quality-gates` is public and
+therefore eligible for rulesets at no cost, but currently has none and `main` is
+unprotected — the channel every consumer SHA-pins is not itself gated. Consumers
+are insulated by pinning (a pinned SHA cannot change under them), so this is a
+supply-chain hygiene gap rather than an active exposure, but it should be closed
+because here, unlike the private repos, closing it is free.
+
 ## Ratchet (per the standard)
 
 Strictness moves one way only — **report-only → warn → block**. On a legacy repo, start
