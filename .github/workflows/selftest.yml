@@ -63,8 +63,18 @@ jobs:
           done < <(find . -name '*.sh' -not -path './**/node_modules/*' -print0)
           node --check gherkin-lint/gherkin-lint.mjs
 
+      - name: code-slop — install engines
+        working-directory: code-slop-gate
+        run: npm ci
+
       - name: code-slop — dependency baseline ratchet
         run: code-slop-gate/test-dependency-baseline.sh
+
+      # The jscpd snapshot ratchet: inherited clones are warnings, only new or
+      # expanded ones fail. This is the half the CI copy never had, and its
+      # absence is what made wa#336 fail on a clone that came from main.
+      - name: code-slop — jscpd snapshot ratchet
+        run: code-slop-gate/test-jscpd-ratchet.sh
 
       # Every rule paired with the near-miss that must not fire, plus the
       # path-vs-diff separation whose absence hid a real bug until #5.

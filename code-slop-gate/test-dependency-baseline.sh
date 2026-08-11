@@ -13,7 +13,7 @@ cat >"$WORK/base.json" <<'JSON'
 ]}
 JSON
 
-actual="$(jq --slurpfile baseline "$WORK/base.json" --arg base origin/main -f "$FILTER" <<'JSON'
+actual="$(jq --slurpfile baseline "$WORK/base.json" --arg base HEAD -f "$FILTER" <<'JSON'
 {"summary":{"errors":3,"warnings":1},"diagnostics":[
   {"engine":"security","rule":"security/vulnerable-dependency","severity":"error","message":"lodash (high)","detail":"npm"},
   {"engine":"security","rule":"security/vulnerable-dependency","severity":"error","message":"minimist (high)","detail":"npm"},
@@ -25,7 +25,7 @@ JSON
 
 jq -e '
   .summary == {errors: 2, warnings: 2}
-  and ([.diagnostics[] | select(.message == "lodash (high) — baseline on origin/main" and .severity == "warning")] | length) == 1
+  and ([.diagnostics[] | select(.message == "lodash (high) — baseline on HEAD" and .severity == "warning")] | length) == 1
   and ([.diagnostics[] | select(.message == "minimist (high)" and .severity == "error")] | length) == 1
   and ([.diagnostics[] | select(.message | contains("left-pad"))] | length) == 0
   and ([.diagnostics[] | select(.rule == "correctness/swallowed-exception" and .severity == "error")] | length) == 1
