@@ -1,0 +1,7 @@
+# GitHub reads exactly ONE CODEOWNERS file: it searches .github/ → root → docs/, first hit wins.
+# A second copy anywhere else is dead text that still reads as authoritative — don't add one.
+#
+# `require_code_owner_review` is false on the `main-protection` ruleset today (a review rule the
+# sole maintainer cannot satisfy as the author would make every PR unmergeable), so these entries
+# are advisory until that changes.
+* @phsb5321
