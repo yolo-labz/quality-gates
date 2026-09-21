@@ -19,8 +19,8 @@
   },
   {
     "name": "SonarQube scan",
-    "status": "in_progress",
-    "conclusion": null,
+    "status": "completed",
+    "conclusion": "success",
     "details_url": "https://github.com/yolo-labz/speckit-plugins/actions/runs/35601157623/job/106337324195"
   },
   {

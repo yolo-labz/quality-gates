@@ -1,0 +1,26 @@
+── code-slop gate ─────────────────────────────
+aislop : score 100 · 0 error(s) · 0 warning(s)
+jscpd  : 0.0% duplication · 0 clone(s) · 0 line(s)
+ratchet: 0 relevant · 0 inherited · 0 regression(s)
+───────────────────────────────────────────────
+✓ PASS — no code-slop over threshold.
+── alignment gate ─────────────────────────────
+scanned: 1 changed code file(s) · 0 error(s) · 0 warning(s)
+───────────────────────────────────────────────
+✓ PASS — no completion-theater or scope violations over threshold.
+╭──────────────────────────────────────────╮
+│ 🥊 lefthook  v2.1.12   hook:  commit-msg │
+╰──────────────────────────────────────────╯
+sync hooks: ❌
+│  Skipping hook sync: could not replace the hook: can't rename pre-commit to pre-commit.old - file already exists
+┃  commitlint ❯
+npm error npx canceled due to missing packages and no YES option: ["commitlint@21.2.3"]
+npm error A complete log of this run can be found in: /home/notroot/.npm/_logs/2026-09-21T12_41_46_919Z-debug-0.log
+
+exit status 1
+┃  no-ai-trailers ❯
+
+  ────────────────────────────────────
+summary: (done in 0.71 seconds)
+✔️ no-ai-trailers (0.01 seconds)
+🥊 commitlint (0.70 seconds)

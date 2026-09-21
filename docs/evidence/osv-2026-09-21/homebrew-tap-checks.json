@@ -25,8 +25,8 @@
   },
   {
     "name": "SonarQube scan",
-    "status": "in_progress",
-    "conclusion": null,
+    "status": "completed",
+    "conclusion": "success",
     "details_url": "https://github.com/yolo-labz/homebrew-tap/actions/runs/35601470070/job/106338323473"
   }
 ]

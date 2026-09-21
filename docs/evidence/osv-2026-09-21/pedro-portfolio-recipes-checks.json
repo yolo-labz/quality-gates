@@ -19,8 +19,8 @@
   },
   {
     "name": "scan",
-    "status": "in_progress",
-    "conclusion": null,
+    "status": "completed",
+    "conclusion": "success",
     "details_url": "https://github.com/yolo-labz/pedro-portfolio-recipes/actions/runs/35601311969/job/106337826397"
   }
 ]

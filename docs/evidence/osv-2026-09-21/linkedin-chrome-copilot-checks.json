@@ -43,8 +43,8 @@
   },
   {
     "name": "scan",
-    "status": "in_progress",
-    "conclusion": null,
+    "status": "completed",
+    "conclusion": "success",
     "details_url": "https://github.com/yolo-labz/linkedin-chrome-copilot/actions/runs/35601312642/job/106337829735"
   },
   {
