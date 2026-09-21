@@ -3,7 +3,9 @@
 
 Usage: python3 specs/010-osv-swarm/verify.py REPO [REPO ...]
 Requires Docker and network access to OSV; any scanner/network error fails closed.
-Evidence is retained under docs/evidence/osv-2026-09-21, never a temp directory.
+Repository evidence stays in that repository's docs/evidence/osv-2026-09-21.
+Only synthetic fixture evidence is written here; private reports must not leak
+through this public coordination repository.
 """
 import json
 import os
@@ -20,18 +22,19 @@ IMAGE = "ghcr.io/google/osv-scanner-action@sha256:71ad04ab2f8798be47870f9b18817a
 ACTION = "a345acffa64b0eaede81a3d9aae6141214d9c8fc"
 
 
-def scan(source, args, label, expected):
-    output = EVIDENCE / (label + ".json")
+def scan(source, args, label, expected, evidence=EVIDENCE):
+    evidence.mkdir(parents=True, exist_ok=True)
+    output = evidence / (label + ".json")
     if output.exists():
         output.unlink()  # This invocation must produce fresh evidence.
     command = [
         "docker", "run", "--rm", "--user", f"{os.getuid()}:{os.getgid()}",
-        "-v", f"{source}:/github/workspace:ro", "-v", f"{EVIDENCE}:/evidence",
+        "-v", f"{source}:/github/workspace:ro", "-v", f"{evidence}:/evidence",
         "-w", "/github/workspace", "--entrypoint", "osv-scanner", IMAGE,
         "scan", "source", "--format=json", f"--output-file=/evidence/{output.name}", *args,
     ]
     result = subprocess.run(command, capture_output=True, text=True, timeout=120)
-    (EVIDENCE / (label + ".log")).write_text(result.stdout + result.stderr)
+    (evidence / (label + ".log")).write_text(result.stdout + result.stderr)
     assert result.returncode == expected, (label, result.returncode, result.stderr)
     if expected == 127:
         assert "flag provided but not defined: -skip-git" in result.stderr + result.stdout
@@ -54,7 +57,8 @@ def verify_repo(repo):
     assert "fail-on-vuln: false" not in text, repo
     if (repo / "Cargo.lock").exists():
         assert "--allow-no-lockfiles" not in args, repo
-    scan(repo, args, repo.name.removesuffix("-091-osv-swarm") + "-verified", 0)
+    scan(repo, args, repo.name.removesuffix("-091-osv-swarm") + "-verified", 0,
+         evidence=repo / "docs/evidence/osv-2026-09-21")
 
 
 def fixtures():
