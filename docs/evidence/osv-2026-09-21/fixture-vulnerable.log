@@ -1,0 +1,4 @@
+Scanning dir ./
+Starting filesystem walk for root: /
+Scanned /github/workspace/requirements.txt file and found 1 package
+End status: 1 dirs visited, 2 inodes visited, 1 Extract calls, 235.434µs elapsed, 235.553µs wall time

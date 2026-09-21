@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/notroot/Documents/Code/yolo-labz/quality-gates-010-osv-swarm/specs/010-osv-swarm/verify.py", line 76, in <module>
+    verify_repo(Path(argument).resolve())
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/notroot/Documents/Code/yolo-labz/quality-gates-010-osv-swarm/specs/010-osv-swarm/verify.py", line 48, in verify_repo
+    assert f"@{ACTION} # v2.6.0" in text, repo
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: /home/notroot/Documents/Code/yolo-labz/chrome-bridge-091-osv-swarm

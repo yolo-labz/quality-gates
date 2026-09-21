@@ -1,0 +1,4 @@
+Scanning dir ./
+Starting filesystem walk for root: /
+Scanned /github/workspace/Cargo.lock file and found 110 packages
+End status: 23 dirs visited, 173 inodes visited, 1 Extract calls, 6.417701ms elapsed, 6.418096ms wall time

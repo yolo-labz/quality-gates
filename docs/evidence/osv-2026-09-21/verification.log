@@ -1,0 +1,11 @@
+chrome-bridge-verified: exit=0, result_sources=0
+nixos-ops-skill-verified: exit=0, result_sources=0
+claude-commands-verified: exit=0, result_sources=0
+speckit-plugins-verified: exit=0, result_sources=0
+fand-verified: exit=0, result_sources=0
+linkedin-chrome-copilot-verified: exit=0, result_sources=0
+homebrew-tap-verified: exit=0, result_sources=0
+pedro-portfolio-recipes-verified: exit=0, result_sources=0
+fixture-empty: exit=0, result_sources=0
+fixture-vulnerable: exit=1, result_sources=2
+synthetic vulnerable dependency still fails with allow-no-lockfiles

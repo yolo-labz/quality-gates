@@ -1,0 +1,39 @@
+Original behavior: expected regression failure
+
+F
+======================================================================
+FAIL: test_repository_owns_its_scan_evidence (__main__.EvidenceOwnership.test_repository_owns_its_scan_evidence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/var/tmp/pi-agent-1000/6783277c54b40ed0.2750952.d32000900c02/swarm-evidence-regression-7ut6wr7w/test_verify.py", line 28, in test_repository_owns_its_scan_evidence
+    scanner.assert_called_once_with(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        repo, ["--recursive", "--allow-no-lockfiles", "./"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        "private-repo-verified", 0,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        evidence=repo / "docs/evidence/osv-2026-09-21",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/nix/store/rn276df5mc505wjiwha1fhl42fr5cx4l-python3-3.13.13-env/lib/python3.13/unittest/mock.py", line 991, in assert_called_once_with
+    return self.assert_called_with(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/nix/store/rn276df5mc505wjiwha1fhl42fr5cx4l-python3-3.13.13-env/lib/python3.13/unittest/mock.py", line 979, in assert_called_with
+    raise AssertionError(_error_message()) from cause
+AssertionError: expected call not found.
+Expected: mock(PosixPath('/var/tmp/pi-agent-1000/6783277c54b40ed0.2750952.d32000900c02/tmpm5qzaon6/private-repo-091-osv-swarm'), ['--recursive', '--allow-no-lockfiles', './'], 'private-repo-verified', 0, evidence=PosixPath('/var/tmp/pi-agent-1000/6783277c54b40ed0.2750952.d32000900c02/tmpm5qzaon6/private-repo-091-osv-swarm/docs/evidence/osv-2026-09-21'))
+  Actual: mock(PosixPath('/var/tmp/pi-agent-1000/6783277c54b40ed0.2750952.d32000900c02/tmpm5qzaon6/private-repo-091-osv-swarm'), ['--recursive', '--allow-no-lockfiles', './'], 'private-repo-verified', 0)
+
+----------------------------------------------------------------------
+Ran 1 test in 0.013s
+
+FAILED (failures=1)
+
+Corrected behavior: PASS
+
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.006s
+
+OK

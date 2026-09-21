@@ -1,0 +1,11 @@
+── code-slop gate ─────────────────────────────
+aislop : score 100 · 0 error(s) · 0 warning(s)
+jscpd  : 0.0% duplication · 0 clone(s) · 0 line(s)
+ratchet: 0 relevant · 0 inherited · 0 regression(s)
+───────────────────────────────────────────────
+✓ PASS — no code-slop over threshold.
+── alignment gate ─────────────────────────────
+scanned: 1 changed code file(s) · 0 error(s) · 0 warning(s)
+───────────────────────────────────────────────
+✓ PASS — no completion-theater or scope violations over threshold.
+│  No config files with names ["lefthook" ".lefthook" ".config/lefthook"] have been found in "/home/notroot/Documents/Code/yolo-labz/quality-gates-010-osv-swarm"

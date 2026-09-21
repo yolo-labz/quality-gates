@@ -1,0 +1,21 @@
+{
+  "number": 44,
+  "state": "open",
+  "head": "079187f406b7b4bcd92ad849ca630d2c0044175e",
+  "updated_at": "2026-09-21T09:22:25Z",
+  "checks": [
+    {
+      "name": "OSV-Scanner V2 / osv-scan",
+      "conclusion": "failure",
+      "details_url": "https://github.com/yolo-labz/chrome-bridge/actions/runs/35582909718/job/106279594630"
+    }
+  ],
+  "scanner_errors": [
+    "2026-09-21T09:22:58.4594368Z Incorrect Usage: flag provided but not defined: -skip-git",
+    "2026-09-21T09:22:58.4599646Z flag provided but not defined: -skip-git",
+    "2026-09-21T09:22:58.4639081Z Exit code: 127",
+    "2026-09-21T09:22:58.5742720Z ##[error]OSV-Scanner failed without writing results.json, so there are no results to report on. Failing the job rather than reporting no vulnerabilities found. See the \"Run scanner\" step for the cause.",
+    "2026-09-21T09:22:58.5752649Z ##[error]Process completed with exit code 1.",
+    "2026-09-21T09:22:59.5892985Z ##[error]Path does not exist: results.sarif"
+  ]
+}
