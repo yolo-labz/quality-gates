@@ -1,0 +1,32 @@
+[
+  {
+    "name": "osv-scanner",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/homebrew-tap/runs/106338434903"
+  },
+  {
+    "name": "OSV-Scanner V2 / osv-scan",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/homebrew-tap/actions/runs/35601470789/job/106338325933"
+  },
+  {
+    "name": "code-slop + alignment",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/homebrew-tap/actions/runs/35601469947/job/106338323839"
+  },
+  {
+    "name": "stealth + framing terms",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/homebrew-tap/actions/runs/35601470100/job/106338323767"
+  },
+  {
+    "name": "SonarQube scan",
+    "status": "in_progress",
+    "conclusion": null,
+    "details_url": "https://github.com/yolo-labz/homebrew-tap/actions/runs/35601470070/job/106338323473"
+  }
+]

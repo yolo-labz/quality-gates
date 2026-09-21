@@ -1,0 +1,26 @@
+[
+  {
+    "name": "OSV-Scanner V2 / osv-scan",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/pedro-portfolio-recipes/actions/runs/35601312596/job/106337829295"
+  },
+  {
+    "name": "code-slop + alignment",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/pedro-portfolio-recipes/actions/runs/35601311999/job/106337827282"
+  },
+  {
+    "name": "Scorecard analysis",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/pedro-portfolio-recipes/actions/runs/35601311962/job/106337826440"
+  },
+  {
+    "name": "scan",
+    "status": "in_progress",
+    "conclusion": null,
+    "details_url": "https://github.com/yolo-labz/pedro-portfolio-recipes/actions/runs/35601311969/job/106337826397"
+  }
+]

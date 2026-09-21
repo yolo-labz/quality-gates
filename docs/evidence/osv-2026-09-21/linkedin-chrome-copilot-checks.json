@@ -1,0 +1,62 @@
+[
+  {
+    "name": "osv-scanner",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/linkedin-chrome-copilot/runs/106337920546"
+  },
+  {
+    "name": "OSV-Scanner V2 / osv-scan",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/linkedin-chrome-copilot/actions/runs/35601313112/job/106337830606"
+  },
+  {
+    "name": "shellcheck + shfmt",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/linkedin-chrome-copilot/actions/runs/35601312628/job/106337830555"
+  },
+  {
+    "name": "bats-core test suite",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/linkedin-chrome-copilot/actions/runs/35601312628/job/106337830488"
+  },
+  {
+    "name": "actionlint + zizmor",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/linkedin-chrome-copilot/actions/runs/35601312628/job/106337830464"
+  },
+  {
+    "name": "pii-scan (hard gate)",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/linkedin-chrome-copilot/actions/runs/35601312628/job/106337830416"
+  },
+  {
+    "name": "fixture + schema validation",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/linkedin-chrome-copilot/actions/runs/35601312628/job/106337830306"
+  },
+  {
+    "name": "scan",
+    "status": "in_progress",
+    "conclusion": null,
+    "details_url": "https://github.com/yolo-labz/linkedin-chrome-copilot/actions/runs/35601312642/job/106337829735"
+  },
+  {
+    "name": "code-slop + alignment",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/linkedin-chrome-copilot/actions/runs/35601312622/job/106337829533"
+  },
+  {
+    "name": "stealth + framing terms",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/linkedin-chrome-copilot/actions/runs/35601312607/job/106337829140"
+  }
+]

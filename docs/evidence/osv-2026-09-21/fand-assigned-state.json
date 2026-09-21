@@ -1,0 +1,21 @@
+{
+  "number": 80,
+  "state": "open",
+  "head": "d796ab2c71f45d367c9bffad334e5d68526102d6",
+  "updated_at": "2026-09-21T09:18:44Z",
+  "checks": [
+    {
+      "name": "OSV-Scanner V2 / osv-scan",
+      "conclusion": "failure",
+      "details_url": "https://github.com/yolo-labz/fand/actions/runs/35582554273/job/106278499503"
+    }
+  ],
+  "scanner_errors": [
+    "2026-09-21T09:20:09.6946558Z Incorrect Usage: flag provided but not defined: -skip-git",
+    "2026-09-21T09:20:09.6960811Z flag provided but not defined: -skip-git",
+    "2026-09-21T09:20:09.6996176Z Exit code: 127",
+    "2026-09-21T09:20:09.8220912Z ##[error]OSV-Scanner failed without writing results.json, so there are no results to report on. Failing the job rather than reporting no vulnerabilities found. See the \"Run scanner\" step for the cause.",
+    "2026-09-21T09:20:09.8232785Z ##[error]Process completed with exit code 1.",
+    "2026-09-21T09:20:10.7814545Z ##[error]Path does not exist: results.sarif"
+  ]
+}

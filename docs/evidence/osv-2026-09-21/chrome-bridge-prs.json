@@ -1,0 +1,18 @@
+[
+  {
+    "number": 45,
+    "title": "chore(deps): bump astral-sh/setup-uv from 9.0.0 to 10.1.0",
+    "updated_at": "2026-09-21T09:23:48Z",
+    "html_url": "https://github.com/yolo-labz/chrome-bridge/pull/45",
+    "head": "0a8cc360d5ba5f2110deead3e5a873eef97111df",
+    "branch": "dependabot/github_actions/astral-sh/setup-uv-10.1.0"
+  },
+  {
+    "number": 44,
+    "title": "chore(deps): bump the github-actions group with 4 updates",
+    "updated_at": "2026-09-21T09:22:25Z",
+    "html_url": "https://github.com/yolo-labz/chrome-bridge/pull/44",
+    "head": "079187f406b7b4bcd92ad849ca630d2c0044175e",
+    "branch": "dependabot/github_actions/github-actions-de7b20d702"
+  }
+]

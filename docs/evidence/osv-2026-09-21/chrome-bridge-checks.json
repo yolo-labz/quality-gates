@@ -1,0 +1,86 @@
+[
+  {
+    "name": "CodeQL",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/chrome-bridge/runs/106337721718"
+  },
+  {
+    "name": "osv-scanner",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/chrome-bridge/runs/106337544129"
+  },
+  {
+    "name": "OSV-Scanner V2 / osv-scan",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/chrome-bridge/actions/runs/35601160214/job/106337331976"
+  },
+  {
+    "name": "Analyze (javascript-typescript)",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/chrome-bridge/actions/runs/35601159396/job/106337329367"
+  },
+  {
+    "name": "Shellcheck",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/chrome-bridge/actions/runs/35601159369/job/106337329311"
+  },
+  {
+    "name": "Analyze (python)",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/chrome-bridge/actions/runs/35601159396/job/106337329197"
+  },
+  {
+    "name": "actionlint + zizmor",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/chrome-bridge/actions/runs/35601159369/job/106337329154"
+  },
+  {
+    "name": "Python syntax",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/chrome-bridge/actions/runs/35601159369/job/106337329100"
+  },
+  {
+    "name": "Extension JS syntax",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/chrome-bridge/actions/runs/35601159369/job/106337329045"
+  },
+  {
+    "name": "SonarQube scan",
+    "status": "in_progress",
+    "conclusion": null,
+    "details_url": "https://github.com/yolo-labz/chrome-bridge/actions/runs/35601159370/job/106337329031"
+  },
+  {
+    "name": "ruff (report-only)",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/chrome-bridge/actions/runs/35601159361/job/106337329006"
+  },
+  {
+    "name": "code-slop + alignment",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/chrome-bridge/actions/runs/35601159367/job/106337328913"
+  },
+  {
+    "name": "Extension manifest validation",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/chrome-bridge/actions/runs/35601159369/job/106337328856"
+  },
+  {
+    "name": "mypy",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/chrome-bridge/actions/runs/35601159362/job/106337328811"
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "number": 27,
+    "title": "build(deps): bump the actions group with 2 updates",
+    "updated_at": "2026-09-20T15:54:06Z",
+    "html_url": "https://github.com/yolo-labz/homebrew-tap/pull/27",
+    "head": "fb6ec405beba4a98e5bc1e2acdd1c05cae8f4aa0",
+    "branch": "dependabot/github_actions/actions-a7c84ab1ce"
+  }
+]

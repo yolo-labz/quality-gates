@@ -1,0 +1,10 @@
+[
+  {
+    "number": 23,
+    "title": "chore(deps): bump the github-actions group with 4 updates",
+    "updated_at": "2026-09-21T09:19:06Z",
+    "html_url": "https://github.com/yolo-labz/speckit-plugins/pull/23",
+    "head": "86571eef0166f7b15c46fb65527833f541709d69",
+    "branch": "dependabot/github_actions/github-actions-de7b20d702"
+  }
+]
