@@ -119,3 +119,8 @@ ratchet down. Never loosen a passing threshold without an inline justification.
 
 Source gates live at `~/Documents/Code/experiments/{code-slop-gate,alignment-gate}` and are
 nix-packaged for the hook layer (NixOS #974); this repo vendors them for the CI layer.
+
+---
+
+Part of **[yolo-labz](https://github.com/yolo-labz)** — small tools, deliberate automation.
+[Org profile](https://github.com/yolo-labz) · [All repositories](https://github.com/orgs/yolo-labz/repositories) · [Engineering notes](https://blog.home301server.com.br)
