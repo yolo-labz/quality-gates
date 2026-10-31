@@ -2,15 +2,15 @@
   "name": "code-slop-gate",
   "private": true,
   "version": "0.1.0",
-  "description": "Prototype code-slop gate — aislop + jscpd orchestrator (Claude Code hook + PR CI)",
+  "description": "Prototype code-slop gate \u2014 aislop + jscpd orchestrator (Claude Code hook + PR CI)",
   "scripts": {
     "gate": "./code-slop-gate.sh",
     "postinstall": "node patch-python-imports.cjs && node --test test-python-local-imports.cjs",
-    "test": "node patch-python-imports.cjs && node --test test-python-local-imports.cjs && ./test-dependency-baseline.sh && ./test-jscpd-ratchet.sh",
+    "test": "node patch-python-imports.cjs && node --test test-patch-python-imports.cjs && node --test test-python-local-imports.cjs && ./test-dependency-baseline.sh && ./test-jscpd-ratchet.sh",
     "test:jscpd-ratchet": "./test-jscpd-ratchet.sh"
   },
   "devDependencies": {
-    "aislop": "0.12.0",
+    "aislop": "0.16.1",
     "jscpd": "^5.0.10"
   },
   "overrides": {
