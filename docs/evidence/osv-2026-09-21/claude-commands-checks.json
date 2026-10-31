@@ -1,0 +1,38 @@
+[
+  {
+    "name": "osv-scanner",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/claude-commands/runs/106337420883"
+  },
+  {
+    "name": "OSV-Scanner V2 / osv-scan",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/claude-commands/actions/runs/35601158745/job/106337326681"
+  },
+  {
+    "name": "SonarQube scan",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/claude-commands/actions/runs/35601158076/job/106337325607"
+  },
+  {
+    "name": "code-slop + alignment",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/claude-commands/actions/runs/35601158012/job/106337325447"
+  },
+  {
+    "name": "Validate slash-command markdown files",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/claude-commands/actions/runs/35601157969/job/106337324830"
+  },
+  {
+    "name": "Lint GitHub Actions workflows",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/claude-commands/actions/runs/35601157969/job/106337324484"
+  }
+]

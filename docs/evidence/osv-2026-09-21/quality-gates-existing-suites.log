@@ -1,0 +1,40 @@
+dependency baseline ratchet: PASS
+jscpd snapshot ratchet fixtures: PASS
+clean code is silent (over-eagerness check)
+  ok   finished code passes                                 exit=0
+each incomplete-work rule fires, by name
+  ok   TODO fails the gate                                  exit=1
+  ok   TODO names its rule                                  incomplete/todo
+  ok   NotImplementedError fails                            exit=1
+  ok   not-implemented names rule                           incomplete/not-implemented
+  ok   throw-stub names its rule                            incomplete/throw-stub
+  ok   ellipsis body fails                                  exit=1
+  ok   ellipsis names its rule                              incomplete/ellipsis-body
+  ok   lint suppression fails                               exit=1
+  ok   lint-suppressed names rule                           align/lint-suppressed
+a skipped test is a finding — but only in a test file
+  ok   skipped test in a test file fails                    exit=1
+  ok   test/skip names its rule                             test/skip
+  ok   same text outside a test file is ignored             exit=0
+severity split: a warn-tier rule must not fail a build on its own
+  ok   debug artifact is warn-tier by default               exit=0
+  ok   …and fails when opted in                           exit=1
+toggles downgrade instead of disabling (report-only ratchet)
+  ok   TODO fails at default strictness                     exit=1
+  ok   …downgrades to a warning when opted out            exit=0
+  ok   downgraded finding stays visible                     still reported
+file selection: only code, never docs or the gate's own source
+  ok   a TODO in markdown is not code debt                  exit=0
+  ok   unknown extensions are skipped                       exit=0
+  ok   the gate does not flag its own source                exit=0
+blast radius counts files, and is off by default
+  ok   3 clean files pass with the limit off                exit=0
+  ok   …and fail when the limit is 2                      exit=1
+  ok   …and pass when the limit is 3                      exit=0
+path mode reads the tree, never the git diff (#5 regression)
+  ok   path mode sees committed debt                        exit=1
+  ok   diff mode against HEAD reports nothing               exit=0
+usage errors are exit 2, distinct from a finding
+  ok   unknown flag is a tooling error                      exit=2
+
+pass=27 fail=0

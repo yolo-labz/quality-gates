@@ -1,0 +1,4 @@
+Scanning dir ./
+Starting filesystem walk for root: /
+End status: 29 dirs visited, 128 inodes visited, 0 Extract calls, 5.148015ms elapsed, 5.148367ms wall time
+No package sources found

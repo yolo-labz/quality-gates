@@ -1,0 +1,10 @@
+[
+  {
+    "number": 22,
+    "title": "chore(deps): bump the github-actions group with 4 updates",
+    "updated_at": "2026-09-21T09:19:09Z",
+    "html_url": "https://github.com/yolo-labz/claude-commands/pull/22",
+    "head": "b362155c7090034a93dae4f27ad99505e1cf86dd",
+    "branch": "dependabot/github_actions/github-actions-de7b20d702"
+  }
+]

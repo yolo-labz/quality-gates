@@ -1,0 +1,31 @@
+code-slop-gate: ignored 338 finding(s) outside /home/notroot/Documents/Code/yolo-labz/fand-091-osv-swarm
+── code-slop gate ─────────────────────────────
+aislop : score 21 · 0 error(s) · 3 warning(s)
+jscpd  : 2.5530694205393% duplication · 40 clone(s) · 356 line(s)
+ratchet: 0 relevant · 0 inherited · 0 regression(s)
+findings:
+  WARNING  build.rs:34  clippy/clippy::map_unwrap_or — called `map(<f>).unwrap_or_else(<g>)` on an `Option` value
+  WARNING  :0  clippy/unknown — Some errors have detailed explanations: E0412, E0432, E0658.
+  WARNING  :0  clippy/unknown — For more information about an error, try `rustc --explain E0412`.
+───────────────────────────────────────────────
+✓ PASS — no code-slop over threshold.
+── alignment gate ─────────────────────────────
+scanned: 0 changed code file(s) · 0 error(s) · 0 warning(s)
+───────────────────────────────────────────────
+✓ PASS — no completion-theater or scope violations over threshold.
+╭──────────────────────────────────────────╮
+│ 🥊 lefthook  v2.1.12   hook:  commit-msg │
+╰──────────────────────────────────────────╯
+sync hooks: ❌
+│  Skipping hook sync: could not replace the hook: can't rename pre-push to pre-push.old - file already exists
+┃  conventional ❯
+
+┃  no-ai-trailers ❯
+
+  ────────────────────────────────────
+summary: (done in 0.02 seconds)
+✔️ conventional (0.01 seconds)
+✔️ no-ai-trailers (0.01 seconds)
+[091-osv-swarm eba0361] fix(ci): repair OSV scanner argument contract
+ 2 files changed, 23 insertions(+), 2 deletions(-)
+ create mode 100644 specs/091-osv-swarm/spec.md

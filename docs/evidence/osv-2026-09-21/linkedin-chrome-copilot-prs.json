@@ -1,0 +1,42 @@
+[
+  {
+    "number": 78,
+    "title": "chore(deps): Bump github/codeql-action/upload-sarif from 4.37.9 to 4.38.1",
+    "updated_at": "2026-09-21T09:17:43Z",
+    "html_url": "https://github.com/yolo-labz/linkedin-chrome-copilot/pull/78",
+    "head": "52e21d3b1e35099f48fd451f864e6e58deffde19",
+    "branch": "dependabot/github_actions/github/codeql-action/upload-sarif-4.38.1"
+  },
+  {
+    "number": 77,
+    "title": "chore(deps): Bump SonarSource/sonarqube-scan-action from 8.2.1 to 8.2.2",
+    "updated_at": "2026-09-21T09:16:38Z",
+    "html_url": "https://github.com/yolo-labz/linkedin-chrome-copilot/pull/77",
+    "head": "4aff7c1b0ccfde1d3c1c15211a0a710590b236a6",
+    "branch": "dependabot/github_actions/SonarSource/sonarqube-scan-action-8.2.2"
+  },
+  {
+    "number": 76,
+    "title": "chore(deps): Bump softprops/action-gh-release from 3.0.2 to 3.0.3",
+    "updated_at": "2026-09-21T09:16:33Z",
+    "html_url": "https://github.com/yolo-labz/linkedin-chrome-copilot/pull/76",
+    "head": "18a598b7379d15eb4ef8784e1a43d2ffe07c6017",
+    "branch": "dependabot/github_actions/softprops/action-gh-release-3.0.3"
+  },
+  {
+    "number": 75,
+    "title": "chore(deps): Bump step-security/harden-runner from 2.21.0 to 2.21.1",
+    "updated_at": "2026-09-21T09:16:28Z",
+    "html_url": "https://github.com/yolo-labz/linkedin-chrome-copilot/pull/75",
+    "head": "7eb9e0d74376970c76799b0a433e4386cc48d83d",
+    "branch": "dependabot/github_actions/step-security/harden-runner-2.21.1"
+  },
+  {
+    "number": 74,
+    "title": "chore(deps): Bump google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml from 2.5.1 to 2.6.0",
+    "updated_at": "2026-09-21T09:16:11Z",
+    "html_url": "https://github.com/yolo-labz/linkedin-chrome-copilot/pull/74",
+    "head": "d9f171b727ccbee868739b1f2871388031b33c90",
+    "branch": "dependabot/github_actions/google/osv-scanner-action/dot-github/workflows/osv-scanner-reusable.yml-2.6.0"
+  }
+]
