@@ -39,6 +39,12 @@ const v016 = {
     + 'const hallucinated = checkPyImport(spec, pyDeps ?? manifest.pyDeps, filePath, pyImportRoot);\n',
 };
 
+// aislop 0.19.1 shape: same repair, but the py-dependency expression upstream
+// renamed to `filePyDeps` — the verification must match it structurally.
+const v019 = {
+  cli: v016.cli.replace('pyDeps ?? manifest.pyDeps', 'filePyDeps ?? manifest.pyDeps'),
+};
+
 function fixture(t, version, source) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'aislop-patch-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
@@ -86,6 +92,13 @@ test('0.16.1 with the upstream repair stripped: fails closed', t => {
   const result = run();
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /Upstream local-import repair missing/);
+});
+
+test('0.19.1: renamed py-deps expression still verifies', t => {
+  const { run } = fixture(t, '0.19.1', v019);
+  const result = run();
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /verified upstream repair in 0\.19\.1/);
 });
 
 test('unknown version: refuses to guess', t => {

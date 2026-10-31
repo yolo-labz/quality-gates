@@ -22,7 +22,10 @@ const marker = 'import { isLocalPythonImport } from "../python-local-imports.cjs
 // inside a project is a local sibling import, not a hallucinated dependency.
 const LOCAL_IMPORT_REPAIR = /const checkPyImport = \(spec, pyDeps, filePath, rootDirectory\) => \{[\s\S]{0,400}?isLocalPythonImport\(spec, filePath, rootDirectory\)/;
 const UPSTREAM_LOCAL_IMPORT = /const isLocalPythonImport = \(spec, filePath, rootDirectory\) => \{[\s\S]{0,900}?searchDirectory = path\.dirname\(searchDirectory\)/;
-const CALL_SITE = /checkPyImport\(spec, pyDeps \?\? manifest\.pyDeps, filePath, [A-Za-z_$][\w$]*\)/;
+// The py-dependency expression was renamed upstream (0.19: `filePyDeps`), so the
+// call site is matched structurally: four arguments, with filePath and a root
+// identifier in the tail — that is the contract the local-import repair needs.
+const CALL_SITE = /checkPyImport\(spec, [^,()]+ \?\? manifest\.pyDeps, filePath, [A-Za-z_$][\w$]*\)/;
 
 function patchLocalImports() {
   const edits = [
