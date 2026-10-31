@@ -1,0 +1,38 @@
+[
+  {
+    "name": "osv-scanner",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/nixos-ops-skill/runs/106337428989"
+  },
+  {
+    "name": "OSV-Scanner V2 / osv-scan",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/nixos-ops-skill/actions/runs/35601158752/job/106337327614"
+  },
+  {
+    "name": "code-slop + alignment",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/nixos-ops-skill/actions/runs/35601158135/job/106337325765"
+  },
+  {
+    "name": "Lint GitHub Actions workflows",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/nixos-ops-skill/actions/runs/35601158142/job/106337325274"
+  },
+  {
+    "name": "SonarQube scan",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/nixos-ops-skill/actions/runs/35601158003/job/106337325224"
+  },
+  {
+    "name": "Validate skill manifest + scripts",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/nixos-ops-skill/actions/runs/35601158142/job/106337325117"
+  }
+]

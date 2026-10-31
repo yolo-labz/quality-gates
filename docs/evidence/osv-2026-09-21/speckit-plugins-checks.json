@@ -1,0 +1,38 @@
+[
+  {
+    "name": "osv-scanner",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/speckit-plugins/runs/106337412770"
+  },
+  {
+    "name": "OSV-Scanner V2 / osv-scan",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/speckit-plugins/actions/runs/35601158205/job/106337325836"
+  },
+  {
+    "name": "Lint GitHub Actions workflows",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/speckit-plugins/actions/runs/35601157654/job/106337324349"
+  },
+  {
+    "name": "SonarQube scan",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/speckit-plugins/actions/runs/35601157623/job/106337324195"
+  },
+  {
+    "name": "Validate plugin manifests + commands",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/speckit-plugins/actions/runs/35601157654/job/106337324135"
+  },
+  {
+    "name": "code-slop + alignment",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/speckit-plugins/actions/runs/35601157622/job/106337323723"
+  }
+]

@@ -1,0 +1,6 @@
+2026-09-21T09:20:07.6154535Z Incorrect Usage: flag provided but not defined: -skip-git
+2026-09-21T09:20:07.6155203Z flag provided but not defined: -skip-git
+2026-09-21T09:20:07.6221661Z Exit code: 127
+2026-09-21T09:20:07.7238841Z ##[error]OSV-Scanner failed without writing results.json, so there are no results to report on. Failing the job rather than reporting no vulnerabilities found. See the "Run scanner" step for the cause.
+2026-09-21T09:20:07.7249075Z ##[error]Process completed with exit code 1.
+2026-09-21T09:20:08.6609316Z ##[error]Path does not exist: results.sarif

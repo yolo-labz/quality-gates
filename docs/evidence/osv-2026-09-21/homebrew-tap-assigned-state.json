@@ -1,0 +1,21 @@
+{
+  "number": 27,
+  "state": "open",
+  "head": "fb6ec405beba4a98e5bc1e2acdd1c05cae8f4aa0",
+  "updated_at": "2026-09-20T15:54:06Z",
+  "checks": [
+    {
+      "name": "OSV-Scanner V2 / osv-scan",
+      "conclusion": "failure",
+      "details_url": "https://github.com/yolo-labz/homebrew-tap/actions/runs/35521017835/job/106129723191"
+    }
+  ],
+  "scanner_errors": [
+    "2026-09-20T18:50:54.7643262Z Incorrect Usage: flag provided but not defined: -skip-git",
+    "2026-09-20T18:50:54.7653644Z flag provided but not defined: -skip-git",
+    "2026-09-20T18:50:54.7676568Z Exit code: 127",
+    "2026-09-20T18:50:55.0231114Z ##[error]OSV-Scanner failed without writing results.json, so there are no results to report on. Failing the job rather than reporting no vulnerabilities found. See the \"Run scanner\" step for the cause.",
+    "2026-09-20T18:50:55.0238952Z ##[error]Process completed with exit code 1.",
+    "2026-09-20T18:50:56.0573341Z ##[error]Path does not exist: results.sarif"
+  ]
+}

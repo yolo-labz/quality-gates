@@ -1,0 +1,80 @@
+[
+  {
+    "name": "CodeQL",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/fand/runs/106338140895"
+  },
+  {
+    "name": "osv-scanner",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/fand/runs/106337573515"
+  },
+  {
+    "name": "OSV-Scanner V2 / osv-scan",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/fand/actions/runs/35601166950/job/106337353505"
+  },
+  {
+    "name": "stealth + framing terms",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/fand/actions/runs/35601166020/job/106337351081"
+  },
+  {
+    "name": "code-slop + alignment",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/fand/actions/runs/35601165984/job/106337350435"
+  },
+  {
+    "name": "nix eval module",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/fand/actions/runs/35601165910/job/106337350413"
+  },
+  {
+    "name": "nix build",
+    "status": "in_progress",
+    "conclusion": null,
+    "details_url": "https://github.com/yolo-labz/fand/actions/runs/35601165910/job/106337350331"
+  },
+  {
+    "name": "rustfmt",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/fand/actions/runs/35601165910/job/106337350320"
+  },
+  {
+    "name": "build + test",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/fand/actions/runs/35601165910/job/106337350297"
+  },
+  {
+    "name": "cargo-deny check",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/fand/actions/runs/35601165910/job/106337350252"
+  },
+  {
+    "name": "clippy",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/fand/actions/runs/35601165910/job/106337350019"
+  },
+  {
+    "name": "Analyze (rust)",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/fand/actions/runs/35601165859/job/106337349834"
+  },
+  {
+    "name": "SonarQube scan",
+    "status": "completed",
+    "conclusion": "success",
+    "details_url": "https://github.com/yolo-labz/fand/actions/runs/35601165941/job/106337349380"
+  }
+]

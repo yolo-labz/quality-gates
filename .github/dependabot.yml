@@ -1,0 +1,48 @@
+# Dependabot — weekly, and only for the ecosystems this repo actually has.
+#
+# `github-actions` covers `.github/workflows/` plus the root `action.yml`, which is this repo's
+# product: every action there is SHA-pinned, and a pin nobody moves is a pin that never receives
+# a fix. Dependabot rewrites the SHA and keeps the trailing `# vX.Y.Z` comment in step with it.
+#
+# The two `npm` entries are the engines the action shells out to (aislop + jscpd;
+# @cucumber/gherkin + @cucumber/messages). Each has its own package-lock.json and Dependabot
+# does not walk the tree — one entry per directory, or that engine silently never bumps.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: "chore(actions)"
+    # Non-breaking bumps arrive as one PR; a major stays alone so a breaking action change is
+    # reviewed on its own rather than riding in behind minor ones.
+    groups:
+      github-actions:
+        patterns: ["*"]
+        update-types: [minor, patch]
+
+  - package-ecosystem: npm
+    directory: /code-slop-gate
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      npm:
+        patterns: ["*"]
+        update-types: [minor, patch]
+
+  - package-ecosystem: npm
+    directory: /gherkin-lint
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      npm:
+        patterns: ["*"]
+        update-types: [minor, patch]

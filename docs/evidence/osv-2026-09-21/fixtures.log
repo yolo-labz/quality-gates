@@ -1,0 +1,3 @@
+fixture-empty: exit=0, result_sources=0
+fixture-vulnerable: exit=1, result_sources=2
+synthetic vulnerable dependency still fails with allow-no-lockfiles
