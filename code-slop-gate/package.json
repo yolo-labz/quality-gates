@@ -10,7 +10,7 @@
     "test:jscpd-ratchet": "./test-jscpd-ratchet.sh"
   },
   "devDependencies": {
-    "aislop": "0.19.1",
+    "aislop": "0.20.0",
     "jscpd": "^5.4.2"
   },
   "overrides": {
