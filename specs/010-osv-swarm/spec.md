@@ -2,7 +2,7 @@
 
 ## Spec
 
-Repair the seven assigned public OSV update paths and separately scoped private-target compatibility without disabling scanning, suppressing vulnerabilities, changing repository visibility, or touching application/media code. Generator: OpenAI GPT-6 Astra. Coordinator owns independent full GLM review and all merge/activation gates.
+Repair the seven assigned public OSV update paths and separately scoped private-target compatibility without disabling scanning, suppressing vulnerabilities, changing repository visibility, or touching application/media code. Coordinator owns independent full GLM review and all merge/activation gates.
 
 Observed failure: chrome-bridge job 106279594630 rejects `--skip-git` with exit 127; the identical pinned v2.6.0 container reproduces this locally. Removing that argument reaches extraction. Git-root inclusion is now opt-in (`--include-git-root`, default false). Six public trees have no supported dependency manifests; fand has Cargo.lock (110 packages). Do not mistake an empty inventory for a comprehensive security verdict.
 

@@ -38,7 +38,7 @@ installation step therefore exercises it without any workflow changes.
 - After patch: only the nonexistent dependency remains; **2/2 tests pass**.
 - Existing dependency baseline and jscpd snapshot suites pass unchanged.
 
-Generator: OpenAI. Advisory review and remote CI status belong in the PR, not
+Advisory review and remote CI status belong in the PR, not
 asserted here. Nix's currently vendored package must consume these files and
 run `npm test` before a separate authorized package rollout; this source change
 does not activate a fleet package or replace managed hooks.
