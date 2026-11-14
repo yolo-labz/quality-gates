@@ -37,6 +37,10 @@ inputs:
     description: 'Fail if changed code files exceed N (0 = off).'
     required: false
     default: '0'
+  wording-fail:
+    description: 'Fail on an em dash in a README or added prose, or a statement of how our own text, images or code were made (1=block, 0=report).'
+    required: false
+    default: '1'
   gherkin-paths:
     description: 'Space-separated files/dirs to lint for .feature MUST rules. A path that does not exist, or holds no .feature files, is a silent pass — most repos have none by design.'
     required: false
@@ -75,6 +79,14 @@ runs:
         ALIGN_FAIL_ON_DEBUG: ${{ inputs.align-fail-on-debug }}
         ALIGN_MAX_FILES: ${{ inputs.align-max-files }}
       run: '"${{ github.action_path }}/alignment-gate/alignment-gate.sh" --base "${{ inputs.base-ref }}"'
+
+    - name: wording gate (no method statements, no em dashes in public prose)
+      shell: bash
+      env:
+        WORDING_FAIL: ${{ inputs.wording-fail }}
+      run: |
+        python3 "${{ github.action_path }}/wording-gate/wording-gate.py" --base "${{ inputs.base-ref }}" \
+          || { [ "$WORDING_FAIL" = "0" ] && echo "wording-gate: report only"; }
 
     # Installed unconditionally rather than behind a "does this repo have
     # scenarios" probe: two packages is cheap, and a detection bug here would
