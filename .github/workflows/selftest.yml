@@ -81,6 +81,10 @@ jobs:
       - name: alignment — rule discrimination suite
         run: alignment-gate/test-alignment-gate.sh
 
+      # Planted failures fail, product mentions and waivers pass.
+      - name: wording — gate suite
+        run: python3 -m unittest -q wording-gate/test_wording_gate.py
+
       - name: gherkin — install engines
         working-directory: gherkin-lint
         run: npm ci

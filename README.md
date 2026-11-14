@@ -1,9 +1,9 @@
 # quality-gates
 
-The 3 fleet-wide quality gates as one **composite GitHub Action** — so every yolo-labz repo
-gates its PR diff server-side, identically, without vendoring the scripts N times.
+Four quality gates for a pull request diff, packaged as one **composite GitHub Action**. Every
+yolo-labz repo runs the same checks server-side, without copying the scripts into each repo.
 
-Implements the global-gate layer of [Standard — Project Quality & Alignment Enforcement].
+Implements the global-gate layer of [Standard: Project Quality & Alignment Enforcement].
 The same two gates also run as Claude Code / opencode / Codex hooks + git pre-commit (NixOS
 #974); this action is the **CI layer** that gates the diff independent of any host hook.
 
@@ -11,14 +11,15 @@ The same two gates also run as Claude Code / opencode / Codex hooks + git pre-co
 |---|---|---|
 | **code-slop-gate** (aislop + jscpd) | anti-slop | swallowed exceptions, `as any`, narrative comments, dead code, oversized functions, copy-paste |
 | **alignment-gate** (git+grep+awk, zero-dep) | alignment | TODO/stub/`NotImplemented` in "done" code, skipped/`.only` tests, added lint-suppressions, debug artifacts, blast-radius |
+| **wording-gate** (stdlib Python) | public prose | an em dash in a README or in added prose, a statement of how our own text, images or code were made (`Generator:` lines, "generated with", AI co-author trailers); a line with `wording-gate: allow` is skipped, and `wording-fail: 0` reports without failing |
 | **gherkin-lint** (official `@cucumber/gherkin` AST) | specification | unparseable `.feature`, invented `Or` keyword, > 10 steps, duplicate scenario names, `Given`→`When`→`Then` violations, vague `Then` outcomes, UI mechanics in steps, placeholder data |
 
-All three are deterministic (no runtime LLM). Exit 0 = clean, 1 = over threshold, 2 = tooling error.
+All four are deterministic (no runtime LLM). Exit 0 = clean, 1 = over threshold, 2 = tooling error.
 
 ### On the Gherkin gate
 
-It exists because `gherkin-lint` is dead upstream — ruby gem 1.2.2 (2017), npm port 4.2.4
-(2023), no successor under the cucumber org — while the official parser is alive and emits a
+It exists because `gherkin-lint` is dead upstream: the ruby gem is at 1.2.2 (2017), the npm port at 4.2.4
+(2023), and the cucumber org has no successor. The official parser is alive and emits a
 real AST. Every rule is a MUST from the fleet's `bdd` context contract, which was written to
 be AST-checkable precisely so the contract and the linter cannot drift.
 
@@ -66,9 +67,9 @@ Measured across the fleet on 10/08/2026:
 
 | Repo | Visibility | Required checks | This action is… |
 |---|---|---|---|
-| `yolo-labz/wa` | public | 11 | a **gate** — red blocks the merge |
-| `yolo-labz/quality-gates` (this repo) | public | 2 | a **gate** — self-gated since 10/08/2026 |
-| every private repo (`Notes`, `NixOS`, `Proso`, `COC_BOT`, `bilu-bridge`, `claude-skills`) | private | 0 (API returns 403 `Upgrade to GitHub Pro…`) | a **signal** — red is visible and merge still succeeds |
+| `yolo-labz/wa` | public | 11 | a **gate**: red blocks the merge |
+| `yolo-labz/quality-gates` (this repo) | public | 2 | a **gate**, self-gated since 10/08/2026 |
+| every private repo (`Notes`, `NixOS`, `Proso`, `COC_BOT`, `bilu-bridge`, `claude-skills`) | private | 0 (API returns 403 `Upgrade to GitHub Pro…`) | a **signal**: red is visible and merge still succeeds |
 
 So on a private free-tier repo this action is a report, not a floor: a red run
 can be merged over, and the local hook layer it pairs with is
@@ -76,14 +77,14 @@ can be merged over, and the local hook layer it pairs with is
 the failure mode this whole gate suite exists to prevent is a green tick being
 read as evidence it is not.
 
-Nothing about the action changes between the two cases — only the claim you are
-entitled to make about it. The two ways to get a real floor on a private repo
+Nothing about the action changes between the two cases. Only the claim you are
+entitled to make about it does. The two ways to get a real floor on a private repo
 are to make it public or to upgrade the plan; both are owner decisions, neither
 is a repo-level fix.
 
 **This repo used to be in the gap it documents. Closed 10/08/2026.** It is public
 and therefore eligible for rulesets at no cost, yet it had no ruleset, an
-unprotected `main`, **and no CI at all** — zero workflows, zero runs. The second
+unprotected `main`, **and no CI at all**: zero workflows, zero runs. The second
 half was the worse one: every gate's own suite here executed on no pull request,
 so a bug in a gate would have reached every consumer on their next pin bump with
 nothing in between. The channel the fleet SHA-pins neither tested nor gated
@@ -96,11 +97,11 @@ squash-only merges, strict up-to-date, required thread resolution, and no force
 push or deletion.
 
 That makes this repo a `gate` row in the table above rather than a footnote to
-it — which is the only honest place for the repo that ships the gates.
+it, which is the only honest place for the repo that ships the gates.
 
 ## Ratchet (per the standard)
 
-Strictness moves one way only — **report-only → warn → block**. On a legacy repo, start
+Strictness moves one way only: **report-only → warn → block**. On a legacy repo, start
 report-only (`align-fail-on-todo: '0'`, `aislop-max-errors: '999'`), fix the backlog, then
 ratchet down. Never loosen a passing threshold without an inline justification.
 
@@ -122,5 +123,5 @@ nix-packaged for the hook layer (NixOS #974); this repo vendors them for the CI 
 
 ---
 
-Part of **[yolo-labz](https://github.com/yolo-labz)** — small tools, deliberate automation.
+Part of **[yolo-labz](https://github.com/yolo-labz)** Small tools, deliberate automation.
 [Org profile](https://github.com/yolo-labz) · [All repositories](https://github.com/orgs/yolo-labz/repositories) · [Engineering notes](https://blog.home301server.com.br)
