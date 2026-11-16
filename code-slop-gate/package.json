@@ -10,8 +10,8 @@
     "test:jscpd-ratchet": "./test-jscpd-ratchet.sh"
   },
   "devDependencies": {
-    "aislop": "0.20.0",
-    "jscpd": "^5.4.2"
+    "aislop": "0.21.0",
+    "jscpd": "^5.4.3"
   },
   "overrides": {
     "react": "19.2.6"
