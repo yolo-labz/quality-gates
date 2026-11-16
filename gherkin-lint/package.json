@@ -8,6 +8,6 @@
   "scripts": { "test": "node gherkin-lint.test.mjs" },
   "dependencies": {
     "@cucumber/gherkin": "^42.0.1",
-    "@cucumber/messages": "^34.2.1"
+    "@cucumber/messages": "^35.0.0"
   }
 }
